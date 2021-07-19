@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Shaders/WorldGrid.tres" type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/grid_step = null
+shader_param/grid_width = null
+shader_param/grid_smoothness = null
+shader_param/grid_x = null
+shader_param/grid_y = null
+shader_param/grid_z = null
+shader_param/grid_x_color = null
+shader_param/grid_y_color = null
+shader_param/grid_z_color = null
+shader_param/base_color = null
+
+[node name="Floor" type="CSGBox3D"]
+size = Vector3(20, 1, 20)
+material = SubResource( 1 )
+script = null
