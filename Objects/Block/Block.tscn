@@ -2,7 +2,8 @@
 
 [ext_resource path="res://Materials/WorldGrid.tres" type="Material" id=1]
 
-[node name="Floor" type="CSGBox3D"]
-size = Vector3(20, 1, 20)
+[node name="Block" type="CSGBox3D"]
+use_collision = true
+size = Vector3(3, 2, 3)
 material = ExtResource( 1 )
 script = null

@@ -23,6 +23,7 @@ var _camera_point: Node3D
 var _camera_gaze: SpringArm3D
 var _camera_base: Node3D
 var _camera_base2: Node3D
+var _camera_light: OmniLight3D
 
 
 # Define for Movement
@@ -67,18 +68,22 @@ func _ready_camera():
 	_camera_point.set_name("CameraPoint")
 	_camera = InterpolatedCamera3D.new()
 	_camera.set_name("Camera")
+	_camera_light = OmniLight3D.new()
+	_camera_light.set_name("CameraLight")
 
 	self.get_parent().add_child(_camera_base)
 	_camera_base.add_child(_camera_base2)
 	_camera_base2.add_child(_camera_gaze)
 	_camera_gaze.add_child(_camera_point)
 	self.get_parent().add_child(_camera)
+	_camera.add_child(_camera_light)
 	_camera.target = _camera_point.get_path()
 	
 	var shape = SphereShape3D.new()
 	shape.set_radius(0.1)
 	_camera_gaze.set_shape(shape)
 	_camera_gaze.add_excluded_object(self.get_rid())
+	_camera_light.omni_range = 10
 	_camera.fov = 60
 	_camera.near = 0.01
 	_camera.current = true

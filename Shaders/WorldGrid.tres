@@ -4,7 +4,7 @@
 code = "/**
  * World Grid
  * Version 1.0.0.0
- * Copyright (c) 2020, Silc Renew / Tokage IT Lab.
+ * Copyright (c) 2021, Silc Renew / Tokage IT Lab.
  * All rights reserved.
  */
 shader_type spatial;
@@ -13,12 +13,13 @@ uniform float grid_step: hint_range(0.1, 10.0) = 1.0;
 uniform float grid_width: hint_range(0.001, 1.0) = 0.03;
 uniform float grid_smoothness: hint_range(0.001, 1.0) = 1.0;
 uniform bool grid_x = true;
-uniform bool grid_y = false;
+uniform bool grid_y = true;
 uniform bool grid_z = true;
 uniform vec4 grid_x_color: hint_color = vec4(1.0, 0.0, 0.0, 1.0);
 uniform vec4 grid_y_color: hint_color = vec4(0.0, 1.0, 0.0, 1.0);
 uniform vec4 grid_z_color: hint_color = vec4(0.0, 0.0, 1.0, 1.0);
 uniform vec4 base_color: hint_color = vec4(1.0);
+uniform float disabled_angle: hint_range(0.0, 45.0) = 5;
 
 varying vec3 world_position;
 
@@ -27,12 +28,13 @@ void vertex() {
 }
 
 void fragment() {
+	mat3 inv_cam = mat3(INV_CAMERA_MATRIX[0].xyz, INV_CAMERA_MATRIX[1].xyz, INV_CAMERA_MATRIX[2].xyz);
     vec3 m = vec3(mod(world_position.x, grid_step), mod(world_position.y, grid_step), mod(world_position.z, grid_step));
     vec3 dist = vec3(min(m.x, abs(grid_step - m.x)), min(m.y, abs(grid_step - m.y)), min(m.z, abs(grid_step - m.z)));
     float gw = grid_width * 0.5;
-    bool gx = grid_x && dist.x <= gw;
-    bool gy = grid_y && dist.y <= gw;
-    bool gz = grid_z && dist.z <= gw;
+    bool gx = grid_x && dist.x <= gw && !(abs(dot(NORMAL * inv_cam, vec3(1,0,0))) > cos(radians(disabled_angle)));
+    bool gy = grid_y && dist.y <= gw && !(abs(dot(NORMAL * inv_cam, vec3(0,1,0))) > cos(radians(disabled_angle)));
+    bool gz = grid_z && dist.z <= gw && !(abs(dot(NORMAL * inv_cam, vec3(0,0,1))) > cos(radians(disabled_angle)));
     if (gx||gy||gz) {
         float cx = gx ? smoothstep(1.0, 1.0 - grid_smoothness, dist.x / gw) : 0.0;
         float cy = gy ? smoothstep(1.0, 1.0 - grid_smoothness, dist.y / gw) : 0.0;

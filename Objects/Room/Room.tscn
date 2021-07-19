@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Objects/Floor/Floor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Materials/WorldGrid.tres" type="Material" id=2]
+
+[node name="Room" type="Node3D"]
+script = null
+
+[node name="Floor" parent="." instance=ExtResource( 1 )]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+
+[node name="Wall" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10.5)
+use_collision = true
+size = Vector3(20, 6, 1)
+material = ExtResource( 2 )
+script = null
+
+[node name="Wall2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 2, 0.5)
+use_collision = true
+size = Vector3(1, 6, 21)
+material = ExtResource( 2 )
+script = null
+
+[node name="Wall3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 2, 0.5)
+use_collision = true
+size = Vector3(1, 6, 21)
+material = ExtResource( 2 )
+script = null
