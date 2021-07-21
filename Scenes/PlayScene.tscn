@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://StaticObjects/Floor/Floor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://StaticObjects/CrossPlate/CrossPlate.tscn" type="PackedScene" id=12]
 [ext_resource path="res://StaticObjects/StairsLow/StairsLow.tscn" type="PackedScene" id=13]
 [ext_resource path="res://StaticObjects/StairsHigh/StairsHigh.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/PlayScene.gd" type="Script" id=15]
 
 [sub_resource type="ProceduralSkyMaterial" id=1]
 
@@ -25,7 +26,7 @@ background_mode = 2
 sky = SubResource( 2 )
 
 [node name="PlayScene" type="Node3D"]
-script = null
+script = ExtResource( 15 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
@@ -169,6 +170,20 @@ custom_colors/font_color = Color(0.027451, 0.407843, 1, 1)
 text = "Move: WASD / Camera: Arrow / Jump: Space / Run: Shift"
 align = 1
 valign = 2
+structured_text_bidi_override_options = []
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Debug" type="Label" parent="Texts"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 33.0
+custom_colors/font_outline_color = Color(0.2, 0.2, 0.2, 1)
+custom_colors/font_color = Color(1, 1, 1, 1)
+custom_constants/outline_size = 2
 structured_text_bidi_override_options = []
 script = null
 __meta__ = {

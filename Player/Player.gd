@@ -143,12 +143,8 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	_state_velocity.x = h_velocity.x
 	_state_velocity.z = h_velocity.z
 
-	# Speed control on slope
-	if self.is_on_floor():
-		var length = Vector3(_state_velocity.x, 0, _state_velocity.z).length()
-		_state_velocity = _state_velocity.normalized() * length
-	else:
-		_state_velocity = Vector3(_state_velocity.x, _state_velocity.y + (-GRAVITY * delta), _state_velocity.z)
+	# Apply GRAVITY
+	_state_velocity = Vector3(_state_velocity.x, _state_velocity.y + (-GRAVITY * delta), _state_velocity.z)
 
 	# Movement when jumping
 	var final_jump_velocity = _state_jump_velocity
