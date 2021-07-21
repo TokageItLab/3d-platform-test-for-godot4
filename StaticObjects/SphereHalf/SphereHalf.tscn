@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Materials/WorldGrid.tres" type="Material" id=1]
+[ext_resource path="res://StaticObjects/SphereHalf/SphereHalf.tres" type="ArrayMesh" id=2]
+
+[sub_resource type="SphereShape3D" id=1]
+radius = 2.0
+
+[node name="SphereHalf" type="StaticBody3D"]
+script = null
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource( 2 )
+surface_material_override/0 = ExtResource( 1 )
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource( 1 )
+script = null

@@ -4,14 +4,14 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/grid_step = null
-shader_param/grid_width = null
-shader_param/grid_smoothness = null
+shader_param/grid_step = 1.0
+shader_param/grid_width = 0.03
+shader_param/grid_smoothness = 1.0
 shader_param/grid_x = true
 shader_param/grid_y = true
 shader_param/grid_z = true
-shader_param/grid_x_color = null
-shader_param/grid_y_color = null
-shader_param/grid_z_color = null
-shader_param/base_color = null
-shader_param/disabled_angle = null
+shader_param/grid_x_color = Color(1, 0, 0, 1)
+shader_param/grid_y_color = Color(0, 1, 0, 1)
+shader_param/grid_z_color = Color(0, 0, 1, 1)
+shader_param/base_color = Color(0.686275, 0.686275, 0.686275, 1)
+shader_param/disabled_angle = 5.0

@@ -40,7 +40,7 @@ void fragment() {
         float cy = gy ? smoothstep(1.0, 1.0 - grid_smoothness, dist.y / gw) : 0.0;
         float cz = gz ? smoothstep(1.0, 1.0 - grid_smoothness, dist.z / gw) : 0.0;
         vec3 c = cx * grid_x_color.rgb * grid_x_color.a + cy * grid_y_color.rgb * grid_y_color.a + cz * grid_z_color.rgb * grid_z_color.a;
-        ALBEDO *= 1.0 - max(cz, max(cx, cy));
+        ALBEDO = base_color.rgb * (1.0 - max(cz, max(cx, cy)));
         EMISSION += c;
     } else {
         ALBEDO = base_color.rgb;

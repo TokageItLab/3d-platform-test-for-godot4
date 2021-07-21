@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Materials/WorldGrid.tres" type="Material" id=1]
+
+[node name="Cylinder" type="CSGCylinder3D"]
+use_collision = true
+height = 3.0
+sides = 16
+material = ExtResource( 1 )
+script = null

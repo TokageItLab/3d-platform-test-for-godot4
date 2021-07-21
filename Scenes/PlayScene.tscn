@@ -1,9 +1,19 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://Objects/Floor/Floor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://StaticObjects/Floor/Floor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Objects/Block/Block.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Objects/Room/Room.tscn" type="PackedScene" id=4]
+[ext_resource path="res://StaticObjects/Block/Block.tscn" type="PackedScene" id=3]
+[ext_resource path="res://StaticObjects/Room/Room.tscn" type="PackedScene" id=4]
+[ext_resource path="res://StaticObjects/SlopeLow/SlopeLow.tscn" type="PackedScene" id=5]
+[ext_resource path="res://StaticObjects/SphereHalf/SphereHalf.tscn" type="PackedScene" id=6]
+[ext_resource path="res://StaticObjects/Cylinder/Cylinder.tscn" type="PackedScene" id=7]
+[ext_resource path="res://StaticObjects/Box/Box.tscn" type="PackedScene" id=8]
+[ext_resource path="res://StaticObjects/SlopeLowHalf/SlopeLowHalf.tscn" type="PackedScene" id=9]
+[ext_resource path="res://StaticObjects/SlopeMiddleHalf/SlopeMiddleHalf.tscn" type="PackedScene" id=10]
+[ext_resource path="res://StaticObjects/SlopeHighHalf/SlopeHighHalf.tscn" type="PackedScene" id=11]
+[ext_resource path="res://StaticObjects/CrossPlate/CrossPlate.tscn" type="PackedScene" id=12]
+[ext_resource path="res://StaticObjects/StairsLow/StairsLow.tscn" type="PackedScene" id=13]
+[ext_resource path="res://StaticObjects/StairsHigh/StairsHigh.tscn" type="PackedScene" id=14]
 
 [sub_resource type="ProceduralSkyMaterial" id=1]
 
@@ -72,6 +82,62 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3, 5)
 [node name="Room" parent="Rooms/BlockTestRoom" instance=ExtResource( 4 )]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
 
+[node name="StairsLow" parent="Rooms/BlockTestRoom" instance=ExtResource( 13 )]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.2, 0, -2)
+
+[node name="StairsHigh" parent="Rooms/BlockTestRoom" instance=ExtResource( 14 )]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.2, 0, 0)
+
+[node name="SlopeTestRoom" type="Node3D" parent="Rooms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+script = null
+
+[node name="Room" parent="Rooms/SlopeTestRoom" instance=ExtResource( 4 )]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="SphereHalf" parent="Rooms/SlopeTestRoom" instance=ExtResource( 6 )]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+
+[node name="SphereHalf2" parent="Rooms/SlopeTestRoom" instance=ExtResource( 6 )]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+
+[node name="SlopeLow" parent="Rooms/SlopeTestRoom" instance=ExtResource( 5 )]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0, 0)
+
+[node name="Cylinder" parent="Rooms/SlopeTestRoom" instance=ExtResource( 7 )]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -2.5, 1, -9)
+
+[node name="Cylinder2" parent="Rooms/SlopeTestRoom" instance=ExtResource( 7 )]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.5, 1, -7)
+
+[node name="Box" parent="Rooms/SlopeTestRoom" instance=ExtResource( 8 )]
+transform = Transform3D(0.782018, -0.376438, 0.496732, 0.612372, 0.612372, -0.5, -0.115966, 0.695194, 0.709406, 0, 1.75, -2)
+
+[node name="SlopeLowHalf" parent="Rooms/SlopeTestRoom" instance=ExtResource( 9 )]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.5, 0, 8.5)
+
+[node name="SlopeMiddleHalf" parent="Rooms/SlopeTestRoom" instance=ExtResource( 10 )]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.5, 0, 8.5)
+
+[node name="SlopeHighHalf" parent="Rooms/SlopeTestRoom" instance=ExtResource( 11 )]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.5, 0, 8.5)
+
+[node name="CrossPlate" parent="Rooms/SlopeTestRoom" instance=ExtResource( 12 )]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.8, 0)
+
+[node name="LiftTestRoom" type="Node3D" parent="Rooms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+script = null
+
+[node name="Room" parent="Rooms/LiftTestRoom" instance=ExtResource( 4 )]
+
+[node name="BlankRoom" type="Node3D" parent="Rooms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+script = null
+
+[node name="Room" parent="Rooms/BlankRoom" instance=ExtResource( 4 )]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
 [node name="Environments" type="Node3D" parent="."]
 script = null
 
@@ -84,6 +150,12 @@ script = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environments"]
 environment = SubResource( 3 )
+script = null
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Environments"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+light_energy = 25.0
+omni_range = 50.0
 script = null
 
 [node name="Texts" type="Node3D" parent="."]
