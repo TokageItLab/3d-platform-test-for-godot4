@@ -44,7 +44,7 @@ enum PLAYER_POSITION_STATE {
 var _state_orientation: Transform3D = Transform3D.IDENTITY
 var _state_root_motion: Transform3D = Transform3D.IDENTITY
 var _state_motion: Vector2 = Vector2.ZERO
-var _state_velocity: Vector3 = Vector3.ZERO
+var _state_gravity: float = 0.0
 var _state_jump_velocity: Vector3 = Vector3.ZERO
 var _state_jump_additional_velocity: Vector3 = Vector3.ZERO
 var _state_jump_speed: float = 0.0
@@ -140,27 +140,30 @@ func _input_motion(delta: float, motion: Vector2) -> Vector2:
 
 func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	var h_velocity = orientation.origin / delta
-	_state_velocity.x = h_velocity.x
-	_state_velocity.z = h_velocity.z
+	self.linear_velocity.x = h_velocity.x
+	self.linear_velocity.z = h_velocity.z
 
 	# Apply GRAVITY
 	if self.is_on_floor():
-		var length = Vector3(_state_velocity.x, 0, _state_velocity.z).length()
-		_state_velocity = _state_velocity.normalized() * length
+		_state_gravity = 0
+		var length = Vector3(self.linear_velocity.x, 0, self.linear_velocity.z).length()
+		self.linear_velocity = self.linear_velocity.normalized() * length
 	else:
-		_state_velocity = Vector3(_state_velocity.x, _state_velocity.y + (-GRAVITY * delta), _state_velocity.z)
+		_state_gravity = -GRAVITY * delta
+		self.linear_velocity.y = self.linear_velocity.y + _state_gravity
+	
 
 	# Movement when jumping
 	var final_jump_velocity = _state_jump_velocity
-	var to_floor_veloicity: Vector3
-	if _state_jump_velocity.x * _state_jump_additional_velocity.x > 0 && abs(_state_jump_additional_velocity.x) > abs(_state_jump_velocity.x):
-		final_jump_velocity.x = _state_jump_additional_velocity.x
-	else:
-		final_jump_velocity.x = _state_jump_velocity.x + _state_jump_additional_velocity.x
-	if _state_jump_velocity.z * _state_jump_additional_velocity.z > 0 && abs(_state_jump_additional_velocity.z) > abs(_state_jump_velocity.z):
-		final_jump_velocity.z = _state_jump_additional_velocity.z
-	else:
-		final_jump_velocity.z = _state_jump_velocity.z + _state_jump_additional_velocity.z
+	if !self.is_on_floor():
+		if _state_jump_velocity.x * _state_jump_additional_velocity.x > 0 && abs(_state_jump_additional_velocity.x) > abs(_state_jump_velocity.x):
+			final_jump_velocity.x = _state_jump_additional_velocity.x
+		else:
+			final_jump_velocity.x = _state_jump_velocity.x + _state_jump_additional_velocity.x
+		if _state_jump_velocity.z * _state_jump_additional_velocity.z > 0 && abs(_state_jump_additional_velocity.z) > abs(_state_jump_velocity.z):
+			final_jump_velocity.z = _state_jump_additional_velocity.z
+		else:
+			final_jump_velocity.z = _state_jump_velocity.z + _state_jump_additional_velocity.z
 
 	# Calc snap value
 	if self.is_on_floor() && !_state_is_jumping:    
@@ -169,9 +172,13 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 		self.snap = Vector3.ZERO
 
 	# Apply velocity
-	self.linear_velocity = _state_velocity + final_jump_velocity
+	var tmp_velocity = self.linear_velocity;
+	self.linear_velocity = self.linear_velocity + final_jump_velocity
 	self.move_and_slide()
-	_state_velocity = self.linear_velocity
+	
+	# Don't go up slopes in the not floor
+	if !self.is_on_floor() && get_slide_count() > 0:
+		self.linear_velocity.y = tmp_velocity.y
 
 	# Reset jump velocity
 	_state_jump_velocity.y = 0
@@ -222,7 +229,7 @@ func _tps_movement(delta: float) -> void:
 		# Play fall animation
 		_animation_tree["parameters/StateGeneral/current"] = 1
 		_animation_tree["parameters/StateJump/current"] = 1
-	if _state_is_jumping && _state_velocity.y >= 0:
+	if _state_is_jumping && self.linear_velocity.y >= 0:
 		# Play jump animation
 		_animation_tree["parameters/StateGeneral/current"] = 1
 		_animation_tree["parameters/StateJump/current"] = 0
@@ -274,14 +281,14 @@ func _process(delta):
 			# Subtract velocity by moving playform
 			_state_jump_velocity += Vector3(floor_velocity.x * (1.0 - delta), 0, floor_velocity.z * (1.0 - delta))
 			# Reset
-			_state_velocity.y = 0
+			self.linear_velocity.y = 0
 			# Set state is jump
 			_state_is_jumping = true
 			# Does jump has running-up
 			if _state_is_running && !is_equal_approx(_state_motion.length(), 0):
 				_state_was_running_before_jumping = true
 				# Prevent increasing velocity when jumping on a slope
-				var current_velocity_normal = _state_velocity.normalized()
+				var current_velocity_normal = self.linear_velocity.normalized()
 				var slide_velocity: Vector3 = Vector3(current_velocity_normal.x, 0, current_velocity_normal.y)
 				slide_velocity = slide_velocity.normalized() * 4.0 # run root motion speed
 				if self.is_on_floor():
