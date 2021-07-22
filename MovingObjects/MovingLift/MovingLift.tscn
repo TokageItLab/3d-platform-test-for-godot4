@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://MovingObjects/PlayAnimation.gd" type="Script" id=1]
 
@@ -7,7 +7,7 @@ resource_name = "Animation"
 length = 4.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("CSGBox3D:position")
+tracks/0/path = NodePath("StaticBody3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -16,13 +16,13 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3, 2, 2.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0.1, 0), Vector3(0, 5.1, 0), Vector3(0, 5.1, 0), Vector3(0, 0.1, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 5, 0), Vector3(0, 5, 0), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("CSGBox3D:position")
+tracks/0/path = NodePath("StaticBody3D/CSGBox3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -33,18 +33,42 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0.1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("StaticBody3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="BoxShape3D" id=3]
+size = Vector3(3, 0.2, 3)
 
 [node name="MovingLift" type="Node3D"]
 script = ExtResource( 1 )
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-use_collision = true
-size = Vector3(3, 0.2, 3)
-script = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Animation = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 blend_times = []
+script = null
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+kinematic_motion = true
+sync_to_physics = true
+script = null
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+size = Vector3(3, 0.2, 3)
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource( 3 )
 script = null

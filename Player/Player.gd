@@ -164,10 +164,10 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	self.move_and_slide()
 	_state_velocity = self.linear_velocity
 	# For moving platform
-	if self.is_on_floor():
-		self.linear_velocity = self.get_floor_velocity()
-		self.move_and_slide()
-		_state_velocity += self.linear_velocity
+	# if self.is_on_floor():
+	#	self.linear_velocity = self.get_floor_velocity()
+	#	self.move_and_slide()
+	#		_state_velocity += self.linear_velocity
 
 
 	# Reset jump velocity

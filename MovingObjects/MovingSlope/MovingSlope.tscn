@@ -49,6 +49,8 @@ script = null
 
 [node name="SlopeLowHalf" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
+kinematic_motion = true
+sync_to_physics = true
 script = null
 
 [node name="Mesh" type="MeshInstance3D" parent="SlopeLowHalf"]
