@@ -17,7 +17,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	
 	# Calc speed average
 	_speed_array.push_front(_player.linear_velocity.length())
