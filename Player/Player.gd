@@ -144,10 +144,7 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	_state_velocity.z = h_velocity.z
 
 	# Apply GRAVITY
-	if self.is_on_floor():
-		_state_velocity = Vector3(_state_velocity.x, 0, _state_velocity.z)
-	else:
-		_state_velocity = Vector3(_state_velocity.x, _state_velocity.y + (-GRAVITY * delta), _state_velocity.z)
+	_state_velocity = Vector3(_state_velocity.x, _state_velocity.y + (-GRAVITY * delta), _state_velocity.z)
 
 	# Movement when jumping
 	var final_jump_velocity = _state_jump_velocity
@@ -161,17 +158,10 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	else:
 		final_jump_velocity.z = _state_jump_velocity.z + _state_jump_additional_velocity.z
 
-
 	# Apply velocity
-	self.linear_velocity = _state_velocity + final_jump_velocity
+	self.linear_velocity = _state_velocity + final_jump_velocity + self.get_floor_velocity() * delta 
 	self.move_and_slide()
 	_state_velocity = self.linear_velocity
-	# For moving platform
-	# if self.is_on_floor():
-	#	self.linear_velocity = self.get_floor_velocity()
-	#	self.move_and_slide()
-	#		_state_velocity += self.linear_velocity
-
 
 	# Reset jump velocity
 	_state_jump_velocity.y = 0
