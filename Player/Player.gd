@@ -177,7 +177,7 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	self.move_and_slide()
 	
 	# Don't go up slopes in the not floor
-	if !self.is_on_floor() && get_slide_count() > 0:
+	if !self.is_on_floor() && get_slide_count() > 0 && _state_jump_velocity.y <= 0:
 		self.linear_velocity.y = tmp_velocity.y
 
 	# Reset jump velocity
