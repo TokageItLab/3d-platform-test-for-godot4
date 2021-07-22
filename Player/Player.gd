@@ -158,14 +158,17 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	else:
 		final_jump_velocity.z = _state_jump_velocity.z + _state_jump_additional_velocity.z
 
-	# For moving platform
-	if self.is_on_floor():
-		self.global_transform.origin = self.global_transform.origin + (self.get_floor_velocity() * delta)
 
 	# Apply velocity
 	self.linear_velocity = _state_velocity + final_jump_velocity
 	self.move_and_slide()
 	_state_velocity = self.linear_velocity
+	# For moving platform
+	if self.is_on_floor():
+		self.linear_velocity = self.get_floor_velocity()
+		self.move_and_slide()
+		_state_velocity += self.linear_velocity
+
 
 	# Reset jump velocity
 	_state_jump_velocity.y = 0
@@ -213,11 +216,9 @@ func _tps_movement(delta: float) -> void:
 		else:
 			_state_jump_additional_velocity = -target * max(_state_jump_speed, 1.5)
 
-		if _state_velocity.y < 0:
-			# Play fall animation
-			_animation_tree["parameters/StateGeneral/current"] = 1
-			_animation_tree["parameters/StateJump/current"] = 1
-			_state_is_jumping = false
+		# Play fall animation
+		_animation_tree["parameters/StateGeneral/current"] = 1
+		_animation_tree["parameters/StateJump/current"] = 1
 	if _state_is_jumping && _state_velocity.y >= 0:
 		# Play jump animation
 		_animation_tree["parameters/StateGeneral/current"] = 1

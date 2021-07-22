@@ -30,6 +30,15 @@ func _process(delta):
 	
 	_debug_dict["Is On Floor"] = _player.is_on_floor()
 	
+	_debug_dict["Character Velocity X"] = snapped(_player.linear_velocity.x, 0.001)
+	_debug_dict["Character Velocity Y"] = snapped(_player.linear_velocity.y, 0.001)
+	_debug_dict["Character Velocity Z"] = snapped(_player.linear_velocity.z, 0.001)
+
+	var floor_v: Vector3 = _player.get_floor_velocity()
+	_debug_dict["Floor Velocity X"] = snapped(floor_v.x, 0.001)
+	_debug_dict["Floor Velocity Y"] = snapped(floor_v.y, 0.001)
+	_debug_dict["Floor Velocity Z"] = snapped(floor_v.z, 0.001)
+	
 	_debug_log.text = ""
 	for i in _debug_dict:
 		_debug_log.text += str(i) + ": " + str(_debug_dict[i]) + "\n"
