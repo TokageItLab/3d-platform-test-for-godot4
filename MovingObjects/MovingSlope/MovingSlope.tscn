@@ -42,6 +42,7 @@ points = PackedVector3Array(2.5, 0, 1.5, 2.5, 1.5, -1.5, 2.5, 0, -1.5, -2.5, 0, 
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
 anims/Animation = SubResource( 2 )
 anims/RESET = SubResource( 3 )
 blend_times = []

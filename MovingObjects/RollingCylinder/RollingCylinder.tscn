@@ -65,6 +65,7 @@ tracks/2/keys = {
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
 anims/Animation = SubResource( 2 )
 anims/RESET = SubResource( 3 )
 blend_times = []

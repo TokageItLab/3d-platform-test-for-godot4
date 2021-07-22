@@ -72,6 +72,7 @@ shape = SubResource( 3 )
 script = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
 anims/Animation = SubResource( 4 )
 anims/RESET = SubResource( 5 )
 blend_times = []
