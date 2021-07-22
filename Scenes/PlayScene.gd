@@ -29,6 +29,7 @@ func _physics_process(delta):
 	_debug_dict["Average Speed"] = snapped(_speed_average, 0.001)
 	
 	_debug_dict["Is On Floor"] = _player.is_on_floor()
+	_debug_dict["Is On Wall"] = _player.is_on_wall()
 	
 	_debug_dict["Character Velocity X"] = snapped(_player.linear_velocity.x, 0.001)
 	_debug_dict["Character Velocity Y"] = snapped(_player.linear_velocity.y, 0.001)
