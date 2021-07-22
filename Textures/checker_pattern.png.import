@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture2D"
-path.s3tc="res://.godot/imported/checker_pattern.png-aa5d253c6c4c9ff706b45a7a1bc76613.s3tc.stex"
-path.etc2="res://.godot/imported/checker_pattern.png-aa5d253c6c4c9ff706b45a7a1bc76613.etc2.stex"
+path.s3tc="res://.godot/imported/checker_pattern.png-b585c37b42f6ae3b36ca4ecde8c8def3.s3tc.stex"
+path.etc2="res://.godot/imported/checker_pattern.png-b585c37b42f6ae3b36ca4ecde8c8def3.etc2.stex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://MovingObjects/RollingCylinder/checker_pattern.png"
-dest_files=["res://.godot/imported/checker_pattern.png-aa5d253c6c4c9ff706b45a7a1bc76613.s3tc.stex", "res://.godot/imported/checker_pattern.png-aa5d253c6c4c9ff706b45a7a1bc76613.etc2.stex"]
+source_file="res://Textures/checker_pattern.png"
+dest_files=["res://.godot/imported/checker_pattern.png-b585c37b42f6ae3b36ca4ecde8c8def3.s3tc.stex", "res://.godot/imported/checker_pattern.png-b585c37b42f6ae3b36ca4ecde8c8def3.etc2.stex"]
 
 [params]
 
