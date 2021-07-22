@@ -158,6 +158,12 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	else:
 		final_jump_velocity.z = _state_jump_velocity.z + _state_jump_additional_velocity.z
 
+	# Calc snap value
+	if self.is_on_floor() && !_state_is_jumping:         
+		self.snap = -self.get_floor_normal() + self.get_floor_velocity() * delta
+	else:
+		self.snap = Vector3.ZERO
+
 	# Apply velocity
 	self.linear_velocity = _state_velocity + final_jump_velocity + self.get_floor_velocity() * delta 
 	self.move_and_slide()
