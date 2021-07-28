@@ -27,11 +27,11 @@ var _camera_light: OmniLight3D
 
 
 # Define for Movement
-const GRAVITY: float = 30.0 # 重力加速度
+const GRAVITY: float = 30.0 # Gravitational Acceleration
 const DIRECTION_INTERPOLATE_SPEED: float = 1.0
-const MOTION_INTERPOLATE_SPEED: float = 20.0 # 移動速度
-const ROTATION_INTERPOLATE_SPEED: float = 20.0 # 転回速度
-const JUMP_SPEED: float = 12.0 # ジャンプ初速度
+const MOTION_INTERPOLATE_SPEED: float = 20.0 # Movement Speed
+const ROTATION_INTERPOLATE_SPEED: float = 20.0 # Rotation Speed
+const JUMP_SPEED: float = 12.0 # Jump Initial Velocity
 const FLOOR_WAIT = 3.0
 enum PLAYER_POSITION_STATE {
 	FLOOR,
@@ -249,10 +249,6 @@ func _tps_movement(delta: float) -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
 func _process(delta):
 	# After ready
 	if _once:
