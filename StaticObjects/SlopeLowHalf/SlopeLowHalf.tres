@@ -1,4 +1,4 @@
-[gd_resource type="ArrayMesh" load_steps=2 format=3]
+[gd_resource type="ArrayMesh" load_steps=2 format=3 uid="uid://ddkgbj60wl6aw"]
 
 [sub_resource type="ArrayMesh" id="1"]
 _surfaces = [{

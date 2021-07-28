@@ -2,6 +2,7 @@
 
 importer="texture"
 type="StreamTexture2D"
+uid="uid://cgrslmhrbfrtr"
 path.s3tc="res://.godot/imported/checker_pattern.png-b585c37b42f6ae3b36ca4ecde8c8def3.s3tc.stex"
 path.etc2="res://.godot/imported/checker_pattern.png-b585c37b42f6ae3b36ca4ecde8c8def3.etc2.stex"
 metadata={

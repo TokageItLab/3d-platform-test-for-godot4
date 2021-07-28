@@ -249,7 +249,7 @@ func _tps_movement(delta: float) -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	# After ready
 	if _once:
 		_once = false
