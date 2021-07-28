@@ -260,7 +260,7 @@ func _tps_movement(delta: float) -> void:
 #	pass
 
 
-func _physics_process(delta):
+func _process(delta):
 	# After ready
 	if _once:
 		_once = false
