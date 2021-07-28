@@ -284,9 +284,6 @@ func _process(delta):
 				var current_velocity_normal = self.linear_velocity.normalized()
 				var slide_velocity: Vector3 = Vector3(current_velocity_normal.x, 0, current_velocity_normal.y)
 				slide_velocity = slide_velocity.normalized() * 4.0 # run root motion speed
-				if self.is_on_floor():
-					slide_velocity = slide_velocity.slide(self.get_floor_normal())
-				slide_velocity = Vector3(slide_velocity.x, 0, slide_velocity.z)
 				_state_jump_speed = slide_velocity.length()
 			else:
 				_state_was_running_before_jumping = false
