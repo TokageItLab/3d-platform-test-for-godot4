@@ -78,6 +78,7 @@ node_connections = [&"StateGeneral", 0, &"StateLand", &"StateGeneral", 1, &"Stat
 [node name="Player" type="CharacterBody3D"]
 stop_on_slope = true
 script = ExtResource( 6 )
+infinite_inertia = false
 
 [node name="Skeleton" parent="." instance=ExtResource( 1 )]
 bones/0/pose = Transform3D(0.993688, -0.0200208, 0.110377, 0.0176105, 0.999586, 0.0227687, -0.110788, -0.0206812, 0.993629, 0.0369201, 0.0040728, 0.00682316)
