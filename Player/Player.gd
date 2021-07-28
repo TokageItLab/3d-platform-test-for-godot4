@@ -268,7 +268,7 @@ func _physics_process(delta):
 			_state_jump_velocity = Vector3(0, JUMP_SPEED, 0)
 			var floor_velocity = self.get_floor_velocity()
 			# Subtract velocity by moving playform
-			_state_jump_velocity += Vector3(floor_velocity.x * (1.0 - delta), 0, floor_velocity.z * (1.0 - delta))
+			_state_jump_velocity += Vector3(floor_velocity.x, 0, floor_velocity.z)
 			# Reset
 			self.linear_velocity.y = 0
 			# Set state is jump
