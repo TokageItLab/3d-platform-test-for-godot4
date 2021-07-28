@@ -266,12 +266,14 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("action_jump"):
 		if self.is_on_floor():
 			_state_jump_velocity = Vector3(0, JUMP_SPEED, 0)
-			var floor_velocity = self.get_floor_velocity()
+			var floor_velocity: Vector3 = self.get_floor_velocity()
 			# Add velocity by moving playform
 			_state_jump_velocity += Vector3(floor_velocity.x, 0, floor_velocity.z)
 			# Prevent landing on moving platform just after the jump
-			if (floor_velocity.y > 0):
-				self.global_transform.origin = self.global_transform.origin + Vector3(0, floor_velocity.y * delta, 0)
+			var floor_bounce: Vector3 = Vector3(-floor_velocity.x, 0, -floor_velocity.z).bounce(self.get_floor_normal())
+			var floor_bounce_y: float = max(0, floor_bounce.y) + floor_velocity.y
+			if (floor_bounce_y > 0):
+				self.global_transform.origin = self.global_transform.origin + Vector3(0, floor_bounce_y * delta, 0)
 			# Reset
 			self.linear_velocity.y = 0
 			# Set state is jump
