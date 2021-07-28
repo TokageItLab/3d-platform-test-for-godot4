@@ -151,19 +151,12 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	else:
 		_state_gravity = -GRAVITY * delta
 		self.linear_velocity.y = self.linear_velocity.y + _state_gravity
-	
 
 	# Movement when jumping
 	var final_jump_velocity = _state_jump_velocity
 	if !self.is_on_floor():
-		if _state_jump_velocity.x * _state_jump_additional_velocity.x > 0 && abs(_state_jump_additional_velocity.x) > abs(_state_jump_velocity.x):
-			final_jump_velocity.x = _state_jump_additional_velocity.x
-		else:
-			final_jump_velocity.x = _state_jump_velocity.x + _state_jump_additional_velocity.x
-		if _state_jump_velocity.z * _state_jump_additional_velocity.z > 0 && abs(_state_jump_additional_velocity.z) > abs(_state_jump_velocity.z):
-			final_jump_velocity.z = _state_jump_additional_velocity.z
-		else:
-			final_jump_velocity.z = _state_jump_velocity.z + _state_jump_additional_velocity.z
+		final_jump_velocity.x = _state_jump_velocity.x + _state_jump_additional_velocity.x
+		final_jump_velocity.z = _state_jump_velocity.z + _state_jump_additional_velocity.z
 
 	# Calc snap value
 	if self.is_on_floor() && !_state_is_jumping:    
