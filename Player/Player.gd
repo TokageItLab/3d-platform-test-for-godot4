@@ -173,7 +173,7 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	if !self.is_on_floor() && get_slide_count() > 0 && _state_jump_velocity.y <= 0:
 		self.linear_velocity.y = tmp_velocity.y
 
-	# Add bounce by wall and ceil in air to prevend snagging edge of moving wall
+	# Add bounce by wall to prevend snagging edge of moving platform when player jump on it
 	if !self.is_on_floor() && get_slide_count() > 0:
 		var rids: Array = []
 		var append_bounce: Vector3 = Vector3()
