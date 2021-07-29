@@ -181,10 +181,10 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 		for i in ids:
 			var col = self.get_slide_collision(i)
 			if rids.find(col.collider_rid) == -1:
-				var bounce = Vector3(-col.collider_velocity.x, 0, -col.collider_velocity.z).bounce(col.normal)
-				append_bounce = append_bounce + Vector3(bounce.x, 0, bounce.z)
+				var bounce = (-col.collider_velocity).bounce(col.normal)
+				append_bounce = append_bounce + bounce
 				rids.append(col.collider_rid)
-		self.global_transform.origin = self.global_transform.origin + append_bounce * delta
+		self.global_transform.origin = self.global_transform.origin + append_bounce * delta * 2 # const margin
 	# Reset jump velocity
 	_state_jump_velocity.y = 0
 
