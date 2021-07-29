@@ -181,8 +181,9 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 		for i in ids:
 			var col = self.get_slide_collision(i)
 			if rids.find(col.collider_rid) == -1:
-				var bounce = (-col.collider_velocity).bounce(col.normal)
-				append_bounce = append_bounce + bounce
+				# The more perpendicular the normal is to the player, the larger it should be.
+				var bounce = (-col.collider_velocity).bounce(col.normal) * max(0, col.collider_velocity.normalized().dot(col.normal))
+				append_bounce = append_bounce + Vector3(bounce.x, max(0, bounce.y), bounce.z)
 				rids.append(col.collider_rid)
 		self.global_transform.origin = self.global_transform.origin + append_bounce * delta * 2 # const margin
 	# Reset jump velocity
