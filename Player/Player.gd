@@ -173,6 +173,18 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	if !self.is_on_floor() && get_slide_count() > 0 && _state_jump_velocity.y <= 0:
 		self.linear_velocity.y = tmp_velocity.y
 
+	# Add bounce by wall and ceil in air to prevend snagging edge of moving wall
+	if !self.is_on_floor() && get_slide_count() > 0:
+		var rids: Array = []
+		var append_bounce: Vector3 = Vector3()
+		var ids: Array = range(self.get_slide_count()-1, -1, -1)
+		for i in ids:
+			var col = self.get_slide_collision(i)
+			if rids.find(col.collider_rid) == -1:
+				var bounce = Vector3(-col.collider_velocity.x, 0, -col.collider_velocity.z).bounce(col.normal)
+				append_bounce = append_bounce + Vector3(bounce.x, 0, bounce.z)
+				rids.append(col.collider_rid)
+		self.global_transform.origin = self.global_transform.origin + append_bounce * delta
 	# Reset jump velocity
 	_state_jump_velocity.y = 0
 
