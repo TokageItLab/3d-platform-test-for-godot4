@@ -27,6 +27,8 @@ var _camera_light: OmniLight3D
 
 
 # Define for Movement
+const FLOOR_ANGLE_ON_FLOOR = deg2rad(45)
+const FLOOR_ANGLE_WHEN_JUMP = deg2rad(5)
 const GRAVITY: float = 30.0 # Gravitational Acceleration
 const DIRECTION_INTERPOLATE_SPEED: float = 1.0
 const MOTION_INTERPOLATE_SPEED: float = 20.0 # Movement Speed
@@ -168,24 +170,14 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	var tmp_velocity = self.linear_velocity;
 	self.linear_velocity = self.linear_velocity + final_jump_velocity
 	self.move_and_slide()
+
+	# Prevent snagging edge of moving platform when player jump on it
+	if self.is_on_floor() || (!self.is_on_floor() && abs(_state_gravity) >= self.linear_velocity.y):
+		self.floor_max_angle = FLOOR_ANGLE_ON_FLOOR
 	
 	# Don't go up slopes in the not floor
 	if !self.is_on_floor() && get_slide_count() > 0 && _state_jump_velocity.y <= 0:
 		self.linear_velocity.y = tmp_velocity.y
-
-	# Add bounce by wall to prevent snagging edge of moving platform when player jump on it
-	if !self.is_on_floor() && get_slide_count() > 0:
-		var rids: Array = []
-		var append_bounce: Vector3 = Vector3()
-		var ids: Array = range(self.get_slide_count()-1, -1, -1)
-		for i in ids:
-			var col = self.get_slide_collision(i)
-			if rids.find(col.collider_rid) == -1:
-				# The more perpendicular the normal is to the player, the larger it should be.
-				var bounce = (-col.collider_velocity).bounce(col.normal) * max(0, col.collider_velocity.normalized().dot(col.normal))
-				append_bounce = append_bounce + Vector3(bounce.x, max(0, bounce.y), bounce.z)
-				rids.append(col.collider_rid)
-		self.global_transform.origin = self.global_transform.origin + append_bounce * delta * 2 # const margin
 
 	# Reset jump velocity
 	_state_jump_velocity.y = 0
@@ -279,6 +271,7 @@ func _physics_process(delta):
 	# Input jump
 	if Input.is_action_just_pressed("action_jump"):
 		if self.is_on_floor():
+			self.floor_max_angle = FLOOR_ANGLE_WHEN_JUMP
 			_state_jump_velocity = Vector3(0, JUMP_SPEED, 0)
 			var floor_velocity: Vector3 = self.get_floor_velocity()
 			# Add velocity by moving playform
