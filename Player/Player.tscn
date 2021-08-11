@@ -77,7 +77,6 @@ node_connections = [&"StateGeneral", 0, &"StateLand", &"StateGeneral", 1, &"Stat
 
 [node name="Player" type="CharacterBody3D"]
 stop_on_slope = true
-infinite_inertia = false
 script = ExtResource( "6" )
 
 [node name="Skeleton" parent="." instance=ExtResource( "1" )]
