@@ -162,7 +162,7 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 
 	# Calc snap value
 	if self.is_on_floor() && !_state_is_jumping:    
-		self.snap = -self.get_floor_normal() - self.get_floor_velocity() * delta
+		self.snap = -self.get_floor_normal() - self.get_platform_velocity() * delta
 	else:
 		self.snap = Vector3.ZERO
 
@@ -176,7 +176,7 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 		self.floor_max_angle = FLOOR_ANGLE_ON_FLOOR
 	
 	# Don't go up slopes in the not floor
-	if !self.is_on_floor() && get_slide_count() > 0 && _state_jump_velocity.y <= 0:
+	if !self.is_on_floor() && self.get_slide_collision_count() > 0 && _state_jump_velocity.y <= 0:
 		self.linear_velocity.y = tmp_velocity.y
 
 	# Reset jump velocity
@@ -273,7 +273,7 @@ func _physics_process(delta):
 		if self.is_on_floor():
 			self.floor_max_angle = FLOOR_ANGLE_WHEN_JUMP
 			_state_jump_velocity = Vector3(0, JUMP_SPEED, 0)
-			var floor_velocity: Vector3 = self.get_floor_velocity()
+			var floor_velocity: Vector3 = self.get_platform_velocity()
 			# Add velocity by moving playform
 			_state_jump_velocity += Vector3(floor_velocity.x, 0, floor_velocity.z)
 			# Prevent landing on moving platform just after the jump

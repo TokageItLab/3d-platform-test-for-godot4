@@ -35,7 +35,7 @@ func _physics_process(delta):
 	_debug_dict["Character Velocity Y"] = snapped(_player.linear_velocity.y, 0.001)
 	_debug_dict["Character Velocity Z"] = snapped(_player.linear_velocity.z, 0.001)
 
-	var floor_v: Vector3 = _player.get_floor_velocity()
+	var floor_v: Vector3 = _player.get_platform_velocity()
 	_debug_dict["Floor Velocity X"] = snapped(floor_v.x, 0.001)
 	_debug_dict["Floor Velocity Y"] = snapped(floor_v.y, 0.001)
 	_debug_dict["Floor Velocity Z"] = snapped(floor_v.z, 0.001)
