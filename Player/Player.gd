@@ -290,7 +290,7 @@ func _physics_process(delta):
 				_state_was_running_before_jumping = true
 				# Prevent increasing velocity when jumping on a slope
 				var current_velocity_normal = self.linear_velocity.normalized()
-				var slide_velocity: Vector3 = Vector3(current_velocity_normal.x, 0, current_velocity_normal.y)
+				var slide_velocity: Vector3 = Vector3(current_velocity_normal.x, 0, current_velocity_normal.z)
 				slide_velocity = slide_velocity.normalized() * 4.0 # run root motion speed
 				_state_jump_speed = slide_velocity.length()
 			else:
