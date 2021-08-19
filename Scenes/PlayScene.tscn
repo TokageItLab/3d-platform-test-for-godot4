@@ -1,7 +1,7 @@
 [gd_scene load_steps=27 format=3 uid="uid://7j0vkn3efadf"]
 
 [ext_resource type="PackedScene" path="res://StaticObjects/Floor/Floor.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://Player/Player.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bddul4h12wu7p" path="res://Player/Player.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://StaticObjects/Block/Block.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://StaticObjects/Room/Room.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://StaticObjects/SlopeLow/SlopeLow.tscn" id="5"]
