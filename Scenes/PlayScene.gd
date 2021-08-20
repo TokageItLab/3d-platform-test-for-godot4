@@ -9,7 +9,7 @@ var _debug_dict: Dictionary = {
 const SPEED_ARRAY_SIZE = 30
 var _speed_array: Array = []
 var _speed_average: float = 0.0
-
+var before_player_pos: Vector3 = Vector3()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for i in range(SPEED_ARRAY_SIZE):
@@ -20,7 +20,8 @@ func _ready():
 func _physics_process(delta):
 	
 	# Calc speed average
-	_speed_array.push_front(_player.linear_velocity.length())
+	_speed_array.push_front((before_player_pos - _player.global_transform.origin).length())
+	before_player_pos = _player.global_transform.origin
 	_speed_array.pop_back()
 	_speed_average = 0
 	for i in range(SPEED_ARRAY_SIZE):
