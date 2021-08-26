@@ -39,7 +39,7 @@ func _physics_process(delta):
 	if _player.last_collision:
 		_debug_dict["Collision angle"] = "%.2f°" % rad2deg(_player.last_collision.get_angle())
 	else:
-		_debug_dict["Collision angle"] = "NaN"
+		_debug_dict["Collision angle"] = "N/A"
 	
 	_debug_log.text = ""
 	for i in _debug_dict:
