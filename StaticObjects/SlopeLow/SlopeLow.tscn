@@ -1,19 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://dp1o68j4hq7ff"]
 
-[ext_resource path="res://Materials/WorldGrid.tres" type="Material" id=1]
-[ext_resource path="res://StaticObjects/SlopeLow/SlopeLow.tres" type="ArrayMesh" id=2]
+[ext_resource type="Material" uid="uid://d1kk3a0orhggg" path="res://Materials/WorldGrid.tres" id="1"]
+[ext_resource type="ArrayMesh" uid="uid://byjnf6qf8iwvh" path="res://StaticObjects/SlopeLow/SlopeLow.tres" id="2"]
 
-[sub_resource type="ConvexPolygonShape3D" id=1]
+[sub_resource type="ConvexPolygonShape3D" id="1"]
 points = PackedVector3Array(2.5, 0, 3, 2.5, 1.5, 0, 2.5, 0, -3, -2.5, 0, -3, -2.5, 1.5, 0, -2.5, 0, 3)
 
 [node name="SlopeLow" type="StaticBody3D"]
 script = null
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-mesh = ExtResource( 2 )
-surface_material_override/0 = ExtResource( 1 )
+mesh = ExtResource( "2" )
+surface_material_override/0 = ExtResource( "1" )
 script = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( "1" )
 script = null

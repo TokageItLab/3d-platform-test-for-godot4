@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://g0phogaltx16"]
 
-[ext_resource path="res://Materials/WorldGrid.tres" type="Material" id=1]
+[ext_resource type="Material" uid="uid://d1kk3a0orhggg" path="res://Materials/WorldGrid.tres" id="1"]
 
 [node name="Block" type="CSGBox3D"]
 use_collision = true
 size = Vector3(3, 2, 3)
-material = ExtResource( 1 )
+material = ExtResource( "1" )
 script = null

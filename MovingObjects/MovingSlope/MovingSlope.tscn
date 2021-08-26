@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://cixdlcg0n81ln"]
 
-[ext_resource path="res://StaticObjects/SlopeLowHalf/SlopeLowHalf.tres" type="ArrayMesh" id=1]
-[ext_resource path="res://MovingObjects/PlayAnimation.gd" type="Script" id=2]
+[ext_resource type="ArrayMesh" uid="uid://ddkgbj60wl6aw" path="res://StaticObjects/SlopeLowHalf/SlopeLowHalf.tres" id="1"]
+[ext_resource type="Script" path="res://MovingObjects/PlayAnimation.gd" id="2"]
+[ext_resource type="Material" uid="uid://dusgc4yh3y3q5" path="res://Materials/DefaultMat.tres" id="3_84qru"]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "Animation"
 length = 2.0
 loop = true
@@ -20,7 +21,7 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, -3.5), Vector3(0, 0, 3.5), Vector3(0, 0, -3.5)]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("SlopeLowHalf:position")
@@ -35,16 +36,16 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, -2.5)]
 }
 
-[sub_resource type="ConvexPolygonShape3D" id=1]
+[sub_resource type="ConvexPolygonShape3D" id="1"]
 points = PackedVector3Array(2.5, 0, 1.5, 2.5, 1.5, -1.5, 2.5, 0, -1.5, -2.5, 0, -1.5, -2.5, 1.5, -1.5, -2.5, 0, 1.5)
 
 [node name="MovingSlope" type="Node3D"]
-script = ExtResource( 2 )
+script = ExtResource( "2" )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
-anims/Animation = SubResource( 2 )
-anims/RESET = SubResource( 3 )
+anims/Animation = SubResource( "2" )
+anims/RESET = SubResource( "3" )
 blend_times = []
 script = null
 
@@ -55,10 +56,10 @@ sync_to_physics = true
 script = null
 
 [node name="Mesh" type="MeshInstance3D" parent="SlopeLowHalf"]
-mesh = ExtResource( 1 )
-surface_material_override/0 = null
+mesh = ExtResource( "1" )
+surface_material_override/0 = ExtResource( "3_84qru" )
 script = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SlopeLowHalf"]
-shape = SubResource( 1 )
+shape = SubResource( "1" )
 script = null

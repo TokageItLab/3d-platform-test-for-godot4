@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://byqmrpsamkv7n"]
 
-[ext_resource path="res://Materials/WorldGrid.tres" type="Material" id=1]
+[ext_resource type="Material" uid="uid://d1kk3a0orhggg" path="res://Materials/WorldGrid.tres" id="1"]
 
 [node name="Floor" type="CSGBox3D"]
 size = Vector3(20, 1, 20)
-material = ExtResource( 1 )
+material = ExtResource( "1" )
 script = null

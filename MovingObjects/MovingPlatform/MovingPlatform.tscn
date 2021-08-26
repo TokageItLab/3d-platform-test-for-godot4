@@ -1,18 +1,19 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://ckjckr5ltgpv6"]
 
-[ext_resource path="res://MovingObjects/MovingPlatform/Platform.tres" type="ArrayMesh" id=1]
-[ext_resource path="res://MovingObjects/PlayAnimation.gd" type="Script" id=2]
+[ext_resource type="ArrayMesh" uid="uid://h5licr272w2q" path="res://MovingObjects/MovingPlatform/Platform.tres" id="1"]
+[ext_resource type="Script" path="res://MovingObjects/PlayAnimation.gd" id="2"]
+[ext_resource type="Material" uid="uid://dusgc4yh3y3q5" path="res://Materials/DefaultMat.tres" id="3_neeqn"]
 
-[sub_resource type="BoxShape3D" id=1]
+[sub_resource type="BoxShape3D" id="1"]
 size = Vector3(3, 0.5, 6.5)
 
-[sub_resource type="BoxShape3D" id=2]
+[sub_resource type="BoxShape3D" id="2"]
 size = Vector3(3, 2.5, 1)
 
-[sub_resource type="ConvexPolygonShape3D" id=3]
+[sub_resource type="ConvexPolygonShape3D" id="3"]
 points = PackedVector3Array(1.5, 0.5, 0, 1.5, 2, -3, 1.5, 0.5, -3, -1.5, 0.5, -3, -1.5, 2, -3, -1.5, 0.5, 0)
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id="4"]
 resource_name = "Animation"
 length = 5.0
 loop = true
@@ -29,7 +30,7 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, -5), Vector3(0, 0, 5), Vector3(0, 0, -5)]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id="5"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Platform:position")
@@ -45,7 +46,7 @@ tracks/0/keys = {
 }
 
 [node name="MovingPlatform" type="Node3D"]
-script = ExtResource( 2 )
+script = ExtResource( "2" )
 
 [node name="Platform" type="StaticBody3D" parent="."]
 kinematic_motion = true
@@ -53,27 +54,27 @@ sync_to_physics = true
 script = null
 
 [node name="Mesh" type="MeshInstance3D" parent="Platform"]
-mesh = ExtResource( 1 )
-surface_material_override/0 = null
+mesh = ExtResource( "1" )
+surface_material_override/0 = ExtResource( "3_neeqn" )
 script = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platform"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.25)
-shape = SubResource( 1 )
+shape = SubResource( "1" )
 script = null
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Platform"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 3)
-shape = SubResource( 2 )
+shape = SubResource( "2" )
 script = null
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Platform"]
-shape = SubResource( 3 )
+shape = SubResource( "3" )
 script = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
-anims/Animation = SubResource( 4 )
-anims/RESET = SubResource( 5 )
+anims/Animation = SubResource( "4" )
+anims/RESET = SubResource( "5" )
 blend_times = []
 script = null

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://okjih4e11evm"]
 
-[ext_resource path="res://Materials/WorldGrid.tres" type="Material" id=1]
+[ext_resource type="Material" uid="uid://d1kk3a0orhggg" path="res://Materials/WorldGrid.tres" id="1"]
 
 [node name="CrossPlate" type="Node3D"]
 script = null
@@ -9,12 +9,12 @@ script = null
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
 use_collision = true
 size = Vector3(3, 0.1, 3)
-material = ExtResource( 1 )
+material = ExtResource( "1" )
 script = null
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0)
 use_collision = true
 size = Vector3(3, 0.1, 3)
-material = ExtResource( 1 )
+material = ExtResource( "1" )
 script = null
