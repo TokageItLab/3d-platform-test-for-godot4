@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://7j0vkn3efadf"]
+[gd_scene load_steps=28 format=3 uid="uid://7j0vkn3efadf"]
 
 [ext_resource type="PackedScene" uid="uid://byqmrpsamkv7n" path="res://StaticObjects/Floor/Floor.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://bddul4h12wu7p" path="res://Player/Player.tscn" id="2"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" path="res://MovingObjects/RollingCylinder/RollingCylinder.tscn" id="21"]
 [ext_resource type="PackedScene" uid="uid://dbqkg2ro2yp3p" path="res://MovingObjects/SpinningPlane/SpinningPlane.tscn" id="22"]
 [ext_resource type="PackedScene" uid="uid://c8tomvpr6e0h" path="res://MovingObjects/RollingPlane/RollingPlane.tscn" id="23"]
+[ext_resource type="Script" path="res://Others/Pause.gd" id="24_4v7fj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="1"]
 
@@ -199,7 +200,7 @@ offset_top = 684.0
 offset_right = 1280.0
 offset_bottom = 710.0
 theme_override_colors/font_color = Color(0.027451, 0.407843, 1, 1)
-text = "Move: WASD / Camera: Arrow / Jump: Space / Run: Shift"
+text = "Move: WASD / Camera: Arrow / Jump: Space / Run: Shift / Pause Mode: P"
 align = 1
 valign = 2
 structured_text_bidi_override_options = []
@@ -221,3 +222,32 @@ script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Pause" type="Label" parent="Texts"]
+offset_left = 15.1291
+offset_top = 644.21
+offset_right = 119.129
+offset_bottom = 670.21
+theme_override_font_sizes/font_size = 25
+text = "PAUSE MODE"
+structured_text_bidi_override_options = []
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseCommand" type="Label" parent="Texts"]
+offset_left = 17.0
+offset_top = 681.0
+offset_right = 182.0
+offset_bottom = 704.0
+text = "Press the O to move to the next frame"
+structured_text_bidi_override_options = []
+script = null
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pause" type="Node" parent="."]
+process_mode = 3
+script = ExtResource( "24_4v7fj" )
