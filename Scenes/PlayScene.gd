@@ -27,19 +27,17 @@ func _physics_process(delta):
 	for i in range(SPEED_ARRAY_SIZE):
 		_speed_average += _speed_array[i]
 	_speed_average / SPEED_ARRAY_SIZE
+	_debug_dict["Position"] =  "(%f, %f, %f)" % [_player.global_transform.origin.x, _player.global_transform.origin.y, _player.global_transform.origin.z]
 	_debug_dict["Average Speed"] = snapped(_speed_average, 0.001)
+	_debug_dict["Character Velocity"] = "(%.2f, %.2f, %.2f)" % [_player.linear_velocity.x, _player.linear_velocity.y, _player.linear_velocity.z]
+	var floor_v: Vector3 = _player.get_platform_velocity()
+	_debug_dict["Floor Velocity"] = "(%.2f, %.2f, %.2f)" % [floor_v.x, floor_v.y, floor_v.z]
 	
 	_debug_dict["Is On Floor"] = _player.is_on_floor()
 	_debug_dict["Is On Wall"] = _player.is_on_wall()
 	
-	_debug_dict["Character Velocity X"] = snapped(_player.linear_velocity.x, 0.001)
-	_debug_dict["Character Velocity Y"] = snapped(_player.linear_velocity.y, 0.001)
-	_debug_dict["Character Velocity Z"] = snapped(_player.linear_velocity.z, 0.001)
-
-	var floor_v: Vector3 = _player.get_platform_velocity()
-	_debug_dict["Floor Velocity X"] = snapped(floor_v.x, 0.001)
-	_debug_dict["Floor Velocity Y"] = snapped(floor_v.y, 0.001)
-	_debug_dict["Floor Velocity Z"] = snapped(floor_v.z, 0.001)
+	if _player.last_collision:
+		_debug_dict["Collision angle"] = "%.2f°" % rad2deg(_player.last_collision.get_angle())
 	
 	_debug_log.text = ""
 	for i in _debug_dict:
