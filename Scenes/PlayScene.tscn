@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dhbr7g1j3ngh8" path="res://MovingObjects/MovingPlatform2/MovingPlatform2.tscn" id="18"]
 [ext_resource type="PackedScene" uid="uid://c8eih4mofi2ts" path="res://MovingObjects/MovingBoxes/MovingBoxes.tscn" id="19"]
 [ext_resource type="PackedScene" uid="uid://dwjxnsu0dg3i2" path="res://MovingObjects/MovingLift/MovingLift.tscn" id="20"]
-[ext_resource type="PackedScene" path="res://MovingObjects/RollingCylinder/RollingCylinder.tscn" id="21"]
+[ext_resource type="PackedScene" uid="uid://ckaw32mp3v3e4" path="res://MovingObjects/RollingCylinder/RollingCylinder.tscn" id="21"]
 [ext_resource type="PackedScene" uid="uid://dbqkg2ro2yp3p" path="res://MovingObjects/SpinningPlane/SpinningPlane.tscn" id="22"]
 [ext_resource type="PackedScene" uid="uid://c8tomvpr6e0h" path="res://MovingObjects/RollingPlane/RollingPlane.tscn" id="23"]
 [ext_resource type="Script" path="res://Others/Pause.gd" id="24_4v7fj"]

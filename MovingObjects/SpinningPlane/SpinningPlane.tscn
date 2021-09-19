@@ -60,8 +60,7 @@ anims/RESET = SubResource( "2" )
 blend_times = []
 script = null
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-kinematic_motion = true
+[node name="StaticBody3D" type="AnimatableBody3D" parent="."]
 sync_to_physics = true
 script = null
 

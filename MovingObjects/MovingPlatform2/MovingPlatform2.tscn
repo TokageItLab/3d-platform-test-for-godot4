@@ -48,8 +48,7 @@ tracks/0/keys = {
 [node name="MovingPlatform2" type="Node3D"]
 script = ExtResource( "2" )
 
-[node name="Platform" type="StaticBody3D" parent="."]
-kinematic_motion = true
+[node name="Platform" type="AnimatableBody3D" parent="."]
 sync_to_physics = true
 script = null
 
