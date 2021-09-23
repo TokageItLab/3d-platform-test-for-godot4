@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://bddul4h12wu7p"]
 
-[ext_resource type="PackedScene" path="res://Player/Model/Skeleton.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://62puk5eg1etj" path="res://Player/Model/Skeleton.tscn" id="1"]
 [ext_resource type="Animation" path="res://Player/Animations/Idle.tres" id="2"]
 [ext_resource type="Animation" path="res://Player/Animations/Run.tres" id="3"]
 [ext_resource type="Animation" path="res://Player/Animations/Walk.tres" id="4"]
@@ -73,10 +73,12 @@ nodes/StateLand/node = SubResource( "6" )
 nodes/StateLand/position = Vector2(-130, 60)
 nodes/Walk/node = SubResource( "12" )
 nodes/Walk/position = Vector2(-400, 150)
-node_connections = [&"StateGeneral", 0, &"StateLand", &"StateGeneral", 1, &"StateJump", &"StateJump", 0, &"Jump", &"StateJump", 1, &"Fall", &"StateLand", 0, &"Idle", &"StateLand", 1, &"Walk", &"StateLand", 2, &"Run", &"output", 0, &"StateGeneral"]
+node_connections = [&"output", 0, &"StateGeneral", &"StateGeneral", 0, &"StateLand", &"StateGeneral", 1, &"StateJump", &"StateJump", 0, &"Jump", &"StateJump", 1, &"Fall", &"StateLand", 0, &"Idle", &"StateLand", 1, &"Walk", &"StateLand", 2, &"Run"]
 
 [node name="Player" type="CharacterBody3D"]
 floor_stop_on_slope = true
+floor_constant_speed = true
+moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( "6" )
 
 [node name="Skeleton" parent="." instance=ExtResource( "1" )]
