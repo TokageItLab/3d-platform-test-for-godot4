@@ -29,7 +29,7 @@ func _physics_process(delta):
 	_speed_average / SPEED_ARRAY_SIZE
 	_debug_dict["Position"] =  "(%f, %f, %f)" % [_player.global_transform.origin.x, _player.global_transform.origin.y, _player.global_transform.origin.z]
 	_debug_dict["Average Speed"] = snapped(_speed_average, 0.001)
-	_debug_dict["Character Velocity"] = "(%.2f, %.2f, %.2f)" % [_player.linear_velocity.x, _player.linear_velocity.y, _player.linear_velocity.z]
+	_debug_dict["Character Velocity"] = "(%.2f, %.2f, %.2f)" % [_player.motion_velocity.x, _player.motion_velocity.y, _player.motion_velocity.z]
 	var floor_v: Vector3 = _player.get_platform_velocity()
 	_debug_dict["Floor Velocity"] = "(%.2f, %.2f, %.2f)" % [floor_v.x, floor_v.y, floor_v.z]
 	

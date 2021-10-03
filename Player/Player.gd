@@ -144,17 +144,17 @@ func _input_motion(delta: float, motion: Vector2) -> Vector2:
 
 func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	var h_velocity = orientation.origin / delta
-	self.linear_velocity.x = h_velocity.x
-	self.linear_velocity.z = h_velocity.z
+	self.motion_velocity.x = h_velocity.x
+	self.motion_velocity.z = h_velocity.z
 
 	# Apply GRAVITY
 	if self.is_on_floor():
 		_state_gravity = 0
-		var length = Vector3(self.linear_velocity.x, 0, self.linear_velocity.z).length()
-		self.linear_velocity = self.linear_velocity.normalized() * length
+		var length = Vector3(self.motion_velocity.x, 0, self.motion_velocity.z).length()
+		self.motion_velocity = self.motion_velocity.normalized() * length
 	else:
 		_state_gravity = -GRAVITY * delta
-		self.linear_velocity.y = self.linear_velocity.y + _state_gravity
+		self.motion_velocity.y = self.motion_velocity.y + _state_gravity
 
 	# Movement when jumping
 	var final_jump_velocity = _state_jump_velocity
@@ -163,18 +163,14 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 		final_jump_velocity.z = _state_jump_velocity.z + _state_jump_additional_velocity.z
 
 	# Apply velocity
-	var tmp_velocity = self.linear_velocity;
-	self.linear_velocity = self.linear_velocity + final_jump_velocity
+	var tmp_velocity = self.motion_velocity;
+	self.motion_velocity = self.motion_velocity + final_jump_velocity
 	self.move_and_slide()
 	last_collision = get_last_slide_collision()
 
 	# Prevent snagging edge of moving platform when player jump on it
-	if self.is_on_floor() || (!self.is_on_floor() && abs(_state_gravity) >= self.linear_velocity.y):
+	if self.is_on_floor() || (!self.is_on_floor() && abs(_state_gravity) >= self.motion_velocity.y):
 		self.floor_max_angle = FLOOR_ANGLE_ON_FLOOR
-	
-	# Don't go up slopes in the not floor
-	if !self.is_on_floor() && self.get_slide_collision_count() > 0 && _state_jump_velocity.y <= 0:
-		self.linear_velocity.y = tmp_velocity.y
 
 	# Reset jump velocity
 	_state_jump_velocity.y = 0
@@ -225,7 +221,7 @@ func _tps_movement(delta: float) -> void:
 		# Play fall animation
 		_animation_tree["parameters/StateGeneral/current"] = 1
 		_animation_tree["parameters/StateJump/current"] = 1
-	if _state_is_jumping && self.linear_velocity.y >= 0:
+	if _state_is_jumping && self.motion_velocity.y >= 0:
 		# Play jump animation
 		_animation_tree["parameters/StateGeneral/current"] = 1
 		_animation_tree["parameters/StateJump/current"] = 0
@@ -274,19 +270,19 @@ func _physics_process(delta):
 			# Add velocity by moving playform
 			_state_jump_velocity += Vector3(floor_velocity.x, -floor_velocity.y, floor_velocity.z)
 			# Prevent landing on moving platform just after the jump
-			var floor_bounce: Vector3 = Vector3(-floor_velocity.x, 0, -floor_velocity.z).bounce(self.get_floor_normal())
-			var floor_bounce_y: float = max(0, floor_bounce.y) + floor_velocity.y
-			if (floor_bounce_y > 0):
-				self.global_transform.origin = self.global_transform.origin + Vector3(0, floor_bounce_y * delta, 0)
+			#var floor_bounce: Vector3 = Vector3(-floor_velocity.x, 0, -floor_velocity.z).bounce(self.get_floor_normal())
+			#var floor_bounce_y: float = max(0, floor_bounce.y) + floor_velocity.y
+			#if (floor_bounce_y > 0):
+			#	self.global_transform.origin = self.global_transform.origin + Vector3(0, floor_bounce_y * delta, 0)
 			# Reset
-			self.linear_velocity.y = 0
+			#self.motion_velocity.y = 0
 			# Set state is jump
 			_state_is_jumping = true
 			# Does jump has running-up
 			if _state_is_running && !is_equal_approx(_state_motion.length(), 0):
 				_state_was_running_before_jumping = true
 				# Prevent increasing velocity when jumping on a slope
-				var current_velocity_normal = self.linear_velocity.normalized()
+				var current_velocity_normal = self.motion_velocity.normalized()
 				var slide_velocity: Vector3 = Vector3(current_velocity_normal.x, 0, current_velocity_normal.z)
 				slide_velocity = slide_velocity.normalized() * 4.0 # run root motion speed
 				_state_jump_speed = slide_velocity.length()
