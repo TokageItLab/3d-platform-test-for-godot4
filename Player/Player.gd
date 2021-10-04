@@ -163,7 +163,6 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 		final_jump_velocity.z = _state_jump_velocity.z + _state_jump_additional_velocity.z
 
 	# Apply velocity
-	var tmp_velocity = self.motion_velocity;
 	self.motion_velocity = self.motion_velocity + final_jump_velocity
 	self.move_and_slide()
 	last_collision = get_last_slide_collision()
@@ -269,13 +268,6 @@ func _physics_process(delta):
 			var floor_velocity: Vector3 = self.get_platform_velocity()
 			# Add velocity by moving playform
 			_state_jump_velocity += Vector3(floor_velocity.x, -floor_velocity.y, floor_velocity.z)
-			# Prevent landing on moving platform just after the jump
-			#var floor_bounce: Vector3 = Vector3(-floor_velocity.x, 0, -floor_velocity.z).bounce(self.get_floor_normal())
-			#var floor_bounce_y: float = max(0, floor_bounce.y) + floor_velocity.y
-			#if (floor_bounce_y > 0):
-			#	self.global_transform.origin = self.global_transform.origin + Vector3(0, floor_bounce_y * delta, 0)
-			# Reset
-			#self.motion_velocity.y = 0
 			# Set state is jump
 			_state_is_jumping = true
 			# Does jump has running-up
