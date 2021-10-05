@@ -36,11 +36,6 @@ func _physics_process(delta):
 	_debug_dict["Is On Floor"] = _player.is_on_floor()
 	_debug_dict["Is On Wall"] = _player.is_on_wall()
 	
-	if _player.last_collision:
-		_debug_dict["Collision angle"] = "%.2f°" % rad2deg(_player.last_collision.get_angle())
-	else:
-		_debug_dict["Collision angle"] = "N/A"
-	
 	_debug_log.text = ""
 	for i in _debug_dict:
 		_debug_log.text += str(i) + ": " + str(_debug_dict[i]) + "\n"

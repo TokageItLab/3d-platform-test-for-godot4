@@ -58,9 +58,6 @@ var _state_is_running: bool = false
 var _state_was_running_before_jumping: bool = false
 var _state_is_jumping: bool = false
 
-# Debug
-var last_collision: KinematicCollision3D
-
 # Funcs for Camera
 func _ready_camera():
 	_camera_base = Node3D.new()
@@ -160,13 +157,12 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	# Movement when jumping
 	var final_jump_velocity = _state_jump_velocity
 	if !self.is_on_floor():
-		final_jump_velocity.x = _state_jump_velocity.x + _state_jump_platform_velocity.x + _state_jump_additional_velocity.x
-		final_jump_velocity.z = _state_jump_velocity.z + _state_jump_platform_velocity.z + _state_jump_additional_velocity.z
+		final_jump_velocity.x += _state_jump_platform_velocity.x + _state_jump_additional_velocity.x
+		final_jump_velocity.z += _state_jump_platform_velocity.z + _state_jump_additional_velocity.z
 
 	# Apply velocity
 	self.motion_velocity = self.motion_velocity + final_jump_velocity
 	self.move_and_slide()
-	last_collision = get_last_slide_collision()
 
 	# Prevent snagging edge of moving platform when player jump on it
 	if self.is_on_floor() || (!self.is_on_floor() && abs(_state_gravity) >= self.motion_velocity.y):
