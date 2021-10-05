@@ -48,6 +48,7 @@ var _state_root_motion: Transform3D = Transform3D.IDENTITY
 var _state_motion: Vector2 = Vector2.ZERO
 var _state_gravity: float = 0.0
 var _state_jump_velocity: Vector3 = Vector3.ZERO
+var _state_jump_platform_velocity: Vector3 = Vector3.ZERO
 var _state_jump_additional_velocity: Vector3 = Vector3.ZERO
 var _state_jump_speed: float = 0.0
 
@@ -159,8 +160,8 @@ func _apply_orientation(delta: float, orientation: Transform3D) -> void:
 	# Movement when jumping
 	var final_jump_velocity = _state_jump_velocity
 	if !self.is_on_floor():
-		final_jump_velocity.x = _state_jump_velocity.x + _state_jump_additional_velocity.x
-		final_jump_velocity.z = _state_jump_velocity.z + _state_jump_additional_velocity.z
+		final_jump_velocity.x = _state_jump_velocity.x + _state_jump_platform_velocity.x + _state_jump_additional_velocity.x
+		final_jump_velocity.z = _state_jump_velocity.z + _state_jump_platform_velocity.z + _state_jump_additional_velocity.z
 
 	# Apply velocity
 	self.motion_velocity = self.motion_velocity + final_jump_velocity
@@ -236,6 +237,7 @@ func _tps_movement(delta: float) -> void:
 		_animation_tree["parameters/StateGeneral/current"] = 0
 		_state_is_jumping = false
 		_state_jump_velocity = Vector3.ZERO
+		_state_jump_platform_velocity = Vector3.ZERO
 		_state_jump_additional_velocity = Vector3.ZERO
 
 	return
@@ -265,9 +267,10 @@ func _physics_process(delta):
 		if self.is_on_floor():
 			self.floor_max_angle = FLOOR_ANGLE_WHEN_JUMP
 			_state_jump_velocity = Vector3(0, JUMP_SPEED, 0)
-			var floor_velocity: Vector3 = self.get_platform_velocity()
 			# Add velocity by moving playform
-			_state_jump_velocity += Vector3(floor_velocity.x, 0, floor_velocity.z)
+			var floor_velocity: Vector3 = self.get_platform_velocity()
+			floor_velocity.y = 0
+			_state_jump_platform_velocity = floor_velocity
 			# Set state is jump
 			_state_is_jumping = true
 			# Does jump has running-up
