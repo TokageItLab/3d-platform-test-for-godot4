@@ -77,6 +77,7 @@ node_connections = [&"StateGeneral", 0, &"StateLand", &"StateGeneral", 1, &"Stat
 
 [node name="Player" type="CharacterBody3D"]
 floor_constant_speed = true
+moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( "6" )
 
 [node name="Skeleton" parent="." instance=ExtResource( "1" )]
